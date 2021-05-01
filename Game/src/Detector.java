@@ -83,6 +83,7 @@ public class Detector {
             List<Integer> pos_i = positions.get(i);
             int n = pos_i.size();
             if (n == 0) {
+                map_list.add(map_list_i);
                 continue;
             }
             int min_pos = pos_i.get(0);
