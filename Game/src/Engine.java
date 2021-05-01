@@ -23,6 +23,7 @@ public class Engine {
             Engine.makeTurn(engine);
             List<Integer> pot_map = Detector.checkStatus(engine);
             if (engine.isEnded()) {
+                System.out.println();
                 Engine.showState(engine);
                 System.out.println("\n--------------------------");
                 System.out.println("There is a MAP of color: " + engine.getMap_color());
@@ -34,7 +35,9 @@ public class Engine {
             turn = turn + 1;
         }
         if (!engine.isEnded()) {
-            System.out.println("---------------------");
+            System.out.println();
+            Engine.showState(engine);
+            System.out.println("\n---------------------");
             System.out.println("No turns are left.");
             System.out.println("Player 2 is a WINNER!");
             System.out.println("---------------------");
