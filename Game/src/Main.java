@@ -14,12 +14,11 @@ public class Main{
         while (true){
             System.out.println("\nWhat do you want to do?");
             System.out.println(options);
-            System.out.println("> ");
             String choice = scanner.next();
 
             switch (choice) {
                 case "1": MAPDetector.start(); break;
-                case "2": System.out.println("Nope!" + "\n"); break;
+                case "2": System.out.println("\nNope!"); break;
                 case "3": System.exit(0);
                 default:
                     throw new IllegalStateException("Unexpected value: " + choice);
