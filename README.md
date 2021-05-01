@@ -1,2 +1,2 @@
 # Van-der-Waerden-Game
-Projekt z liczb off-diagonal na Gry Kombinatoryczne i Kombinatorykę na Słowach
+Projekt z liczb off-diagonal online na Gry Kombinatoryczne i Kombinatorykę na Słowach
