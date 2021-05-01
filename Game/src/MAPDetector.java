@@ -1,6 +1,8 @@
 public class MAPDetector {
 
-    public static void main(String[] args) {
+    public static void start() {
+
+        System.out.println("\nEnter current vector");
 
     }
 }
