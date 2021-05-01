@@ -28,7 +28,7 @@ public class Engine {
                 System.out.println("\n--------------------------");
                 System.out.println("There is a MAP of color: " + engine.getMap_color());
                 System.out.println("Indexes: " + pot_map);
-                System.out.println("Player 1  is a WINNER!");
+                System.out.println("Player 1  is THE WINNER!");
                 System.out.println("--------------------------");
                 break;
             }
@@ -39,7 +39,7 @@ public class Engine {
             Engine.showState(engine);
             System.out.println("\n---------------------");
             System.out.println("No turns are left.");
-            System.out.println("Player 2 is a WINNER!");
+            System.out.println("Player 2 is THE WINNER!");
             System.out.println("---------------------");
         }
     }
