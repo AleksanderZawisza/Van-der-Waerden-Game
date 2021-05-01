@@ -2,39 +2,27 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class MAPDetector {
+public class Detector {
 
-    public static void start() {
+    public static void demo() {
+        // demo of detecting MAPs of lengths k_i in token vector
         Scanner scanner = new Scanner(System.in);
+        Engine engine = new Engine();
+        Engine.start(engine);
 
-        System.out.println("\nDefine r:");
-        String r_str = scanner.nextLine();
-        int r = Integer.parseInt(r_str);
-        //System.out.println(r);
-
-        System.out.println("\nDefine vector of k_i: \n(separated by spaces)");
-        String ks_str = scanner.nextLine();
-
-        List<Integer> ks = Arrays.stream(ks_str.trim().split("\\s+"))
-                .mapToInt(Integer::parseInt).boxed().collect(Collectors.toList());
-
-        if (ks.size() != r) {
-            throw new IllegalStateException("Length of vector k does not match r!");
-        }
-        //System.out.println(Arrays.toString(ks));
-
-        System.out.println("\nEnter current vector of tokens: \n(starting from 0; separated by spaces)");
+        System.out.println("\nEnter chosen vector of tokens: \n(starting from 0; separated by spaces)");
+        System.out.println(">> ... << ");
         String tokens_str = scanner.nextLine();
 
         List<Integer> tokens = Arrays.stream(tokens_str.trim().split("\\s+"))
                 .mapToInt(Integer::parseInt).boxed().collect(Collectors.toList());
 
-        if (Collections.min(tokens) < 0 || Collections.max(tokens) > r - 1) {
+        if (Collections.min(tokens) < 0 || Collections.max(tokens) > engine.getR() - 1) {
             throw new IllegalStateException("Elements must be between 0 and r-1!");
         }
         //System.out.println(Arrays.toString(tokens));
 
-        List<List<Integer>> positions = MAPDetector.makePositions(tokens, r);
+        List<List<Integer>> positions = Detector.makePositions(tokens, engine.getR());
 
         //print
         System.out.println("\nToken positions by color:");
@@ -45,10 +33,10 @@ public class MAPDetector {
             c = c + 1;
         }
 
-        List<List<List<Integer>>> map_list = MAPDetector.findMAP(positions, ks);
+        List<List<List<Integer>>> map_list = Detector.findMAP(positions, engine.getKs());
 
         //print
-        System.out.println("\nDetected MAPs by colour:");
+        System.out.println("\nDetected MAPs by color:");
         int i = 0;
         for (List<List<Integer>> map_list_i : map_list) {
             System.out.println("---- " + "Color " + i + " ----");
@@ -57,6 +45,22 @@ public class MAPDetector {
             }
             i = i + 1;
         }
+    }
+
+    public static List<Integer> checkStatus(Engine engine) {
+        // checks if game is already won
+        List<List<Integer>> positions = Detector.makePositions(engine.getTokens(), engine.getR());
+        List<List<List<Integer>>> map_list = Detector.findMAP(positions, engine.getKs());
+
+        for (int i = 0; i < map_list.size(); i++) {
+            List<List<Integer>> map_list_i = map_list.get(i);
+            if (map_list_i.size() > 0) {
+                engine.setEnded(true);
+                engine.setMap_color(i);
+                return map_list_i.get(0);
+            }
+        }
+        return new ArrayList<>();
     }
 
     public static List<List<Integer>> makePositions(List<Integer> tokens, int r) {
