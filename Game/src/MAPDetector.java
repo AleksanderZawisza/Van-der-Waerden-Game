@@ -42,6 +42,7 @@ public class MAPDetector {
         for (List<Integer> pos_i : positions) {
             System.out.println("---- " + "Color " + c + " ----");
             System.out.println(Arrays.toString(pos_i.toArray()));
+            c = c + 1;
         }
 
         List<List<List<Integer>>> map_list = MAPDetector.findMAP(positions, ks);
