@@ -82,6 +82,9 @@ public class Detector {
             List<List<Integer>> map_list_i = new ArrayList<>();
             List<Integer> pos_i = positions.get(i);
             int n = pos_i.size();
+            if (n == 0) {
+                continue;
+            }
             int min_pos = pos_i.get(0);
             int max_pos = pos_i.get(n - 1);
             int width = max_pos - min_pos + 1;
