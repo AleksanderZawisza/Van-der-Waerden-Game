@@ -100,7 +100,9 @@ public class Engine {
         int field_size = Math.max(n_len, r_len);
 
         String format_d = "%" + field_size + "d"; //print token
-        if (field_size!=2) { System.out.print(" "); }
+        if (field_size != 2) {
+            System.out.print(" ");
+        }
         for (int i = 0; i < tokens.toArray().length; i++) {
             System.out.print(String.format(format_d, tokens.toArray()[i]));
         }
