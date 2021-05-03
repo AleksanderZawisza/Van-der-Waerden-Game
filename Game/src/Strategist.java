@@ -47,7 +47,7 @@ public class Strategist {
                 else if (o.n_death < this.n_death)
                     return 1;
                 else {
-                    return Integer.compare(this.n_death, o.n_left);
+                    return Integer.compare(o.n_left, this.n_death);
                 }
             }
         }
