@@ -93,17 +93,34 @@ public class Engine {
 
     public static void showState(Engine engine) {
         List<Integer> tokens = engine.getTokens();
-
         System.out.println("Current token vector and positions:");
-        System.out.println(" " + Arrays.toString(tokens.toArray()));
-        String str = "|  ";
-        String repeated = str.repeat(tokens.size() + 1);
-        System.out.println(" " + repeated);
+        // ladne formatowanie miejsc
+        int n_len = Integer.toString(engine.getN()).length() + 1;
+        int r_len = Integer.toString(engine.getR()).length() ;
+        int fieldsize = Math.max(n_len, r_len);
+
+        String formatd = "%" + fieldsize + "d";
+        for(int i = 0; i < tokens.toArray().length; i++) {
+            System.out.print( String.format(formatd, tokens.toArray()[i])); }
+        System.out.println();
+
+        String formats = "%" + fieldsize + "s";
+        String formats_minus1 = "%" + (fieldsize-1) + "s";
+        System.out.print( String.format(formats_minus1, "|"));
+        for(int i = 1; i < tokens.size() + 1; i++) {
+            System.out.print( String.format(formats, "|")); }
+        System.out.println();
+
         int[] indexes = new int[tokens.size() + 1];
         for (int i = 0; i < tokens.size() + 1; i++) {
-            indexes[i] = i;
-        }
-        System.out.println(Arrays.toString(indexes));
+            indexes[i] = i; }
+
+        String formatd_minus1 = "%" + (fieldsize-1) + "d";
+        System.out.print( String.format(formatd_minus1, indexes[0]));
+        for(int i = 1; i < indexes.length; i++) {
+            System.out.print( String.format(formatd, indexes[i])); }
+
+        System.out.println();
     }
 
     public static void initialize(Engine engine) {
