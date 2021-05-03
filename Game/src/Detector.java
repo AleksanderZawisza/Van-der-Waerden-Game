@@ -128,38 +128,37 @@ public class Detector {
 
     public static boolean checkShifted(List<Integer> tokens, int r, List<Integer> ks) {
         List<List<Integer>> positions = Detector.makePositions(tokens, r);
-        for(int i =0; i<r; i++) {
-            int llap = lenghtOfLongestAP(positions.get(i));
-            if(ks.get(i) <= llap)
+        for (int i = 0; i < r; i++) {
+            int len_longest_ap = lengthOfLongestAP(positions.get(i));
+            if (ks.get(i) <= len_longest_ap)
                 return true;
         }
         return false;
     }
 
     public static boolean checkShifting(List<Integer> tokens, int r, List<Integer> ks) {
-        for(int i =0; i<=tokens.size(); i++) {
+        for (int i = 0; i <= tokens.size(); i++) {
             List<Integer> tmpTokens = new ArrayList<>(tokens);
             tmpTokens.add(i, r);
-            if(checkShifted(tmpTokens, r, ks))
+            if (checkShifted(tmpTokens, r, ks))
                 return true;
         }
         return false;
     }
 
-    static int lenghtOfLongestAP(List<Integer> positions)
-    {
+    static int lengthOfLongestAP(List<Integer> positions) {
         int n = positions.size();
         if (n <= 2) return n;
 
         // Create a table and initialize all
         // values as 2. The value ofL[i][j] stores
-        // LLAP with set[i] and set[j] as first two
+        // Len_Longest_AP with set[i] and set[j] as first two
         // elements of AP. Only valid entries are
         // the entries where j>i
-        int L[][] = new int[n][n];
+        int[][] L = new int[n][n];
 
         // Initialize the result
-        int llap = 2;
+        int len_longest_ap = 2;
 
         // Fill entries in last column as 2.
         // There will always be two elements in
@@ -169,51 +168,44 @@ public class Detector {
             L[i][n - 1] = 2;
 
         // Consider every element as second element of AP
-        for (int j = n - 2; j >= 1; j--)
-        {
+        for (int j = n - 2; j >= 1; j--) {
             // Search for i and k for j
-            int i = j -1 , k = j + 1;
-            while (i >= 0 && k <= n - 1)
-            {
+            int i = j - 1, k = j + 1;
+            while (i >= 0 && k <= n - 1) {
                 if (positions.get(i) + positions.get(k) < 2 * positions.get(j))
                     k++;
 
                     // Before changing i, set L[i][j] as 2
-                else if (positions.get(i) + positions.get(k) > 2 * positions.get(j))
-                {
-                    L[i][j] = 2; i--;
+                else if (positions.get(i) + positions.get(k) > 2 * positions.get(j)) {
+                    L[i][j] = 2;
+                    i--;
 
-                }
-
-                else
-                {
-                    // Found i and k for j, LLAP with i and j as first two
-                    // elements is equal to LLAP with j and k as first two
+                } else {
+                    // Found i and k for j, Len_Longest_AP with i and j as first two
+                    // elements is equal to Len_Longest_AP with j and k as first two
                     // elements plus 1. L[j][k] must have been filled
                     // before as we run the loop from right side
                     L[i][j] = L[j][k] + 1;
 
-                    // Update overall LLAP, if needed
-                    llap = Math.max(llap, L[i][j]);
+                    // Update overall Len_Longest_AP, if needed
+                    len_longest_ap = Math.max(len_longest_ap, L[i][j]);
 
                     // Change i and k to fill
                     // more L[i][j] values for current j
-                    i--; k++;
+                    i--;
+                    k++;
                 }
             }
 
             // If the loop was stopped due
             // to k becoming more than
             // n-1, set the remaining
-            // entties in column j as 2
-            while (i >= 0)
-            {
+            // entities in column j as 2
+            while (i >= 0) {
                 L[i][j] = 2;
                 i--;
             }
         }
-        return llap;
+        return len_longest_ap;
     }
-
-
 }
