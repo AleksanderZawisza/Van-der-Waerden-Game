@@ -82,8 +82,15 @@ public class Engine {
         System.out.println("Choose position for next token:");
         System.out.println(">> ... << ");
 
-        String pos_str = scanner.nextLine();
-        int pos = Integer.parseInt(pos_str);
+        int pos = -1;
+        while(pos<0 || pos>tokens.size()){
+            try {
+                pos = Integer.parseInt(scanner.nextLine());
+                if (pos>0 && pos<tokens.size()) break;
+            } catch (Exception e) {}
+            System.out.println("Invalid position! (Range: 0 - " + tokens.size() + ")");
+            System.out.println(">> ... << ");
+        }
         int col_choice = Strategist.chooseColor(engine, pos);
         System.out.println("\nPlayer 2:");
         System.out.println("Chooses color " + col_choice + ".");
@@ -135,8 +142,16 @@ public class Engine {
 
         System.out.println("\nDefine n:");
         System.out.println(">> ... << ");
-        String n_str = scanner.nextLine();
-        int n = Integer.parseInt(n_str);
+
+        int n = -1;
+        while(n<0) {
+            try {
+                n = Integer.parseInt(scanner.nextLine());
+                if (n>0) break;
+            } catch (Exception e) {}
+            System.out.println("Invalid input!");
+            System.out.println(">> ... << ");
+        }
 
         List<Integer> tokens = new ArrayList<>();
 
@@ -152,29 +167,53 @@ public class Engine {
 
         System.out.println("\nDefine r:");
         System.out.println(">> ... << ");
-        String r_str = scanner.nextLine();
-        int r = Integer.parseInt(r_str);
-        //System.out.println(r);
+        int r = -1;
+        while(r<0) {
+            try {
+                r = Integer.parseInt(scanner.nextLine());
+                if (r>0) break;
+            } catch (Exception e) {}
+            System.out.println("Invalid input!");
+            System.out.println(">> ... << ");
+        }
 
         System.out.println("\nDefine vector of k_i:" +
                 " \n(separated by spaces for each k_i or single number if all identical)");
         System.out.println(">> ... << ");
-        String ks_str = scanner.nextLine();
-
-        List<Integer> ks;
-
-        if (ks_str.trim().length() == 1) {
-            Integer k = Integer.parseInt(ks_str.trim());
-            ks = Collections.nCopies(r, k);
-        } else {
-            ks = Arrays.stream(ks_str.trim().split("\\s+"))
-                    .mapToInt(Integer::parseInt).boxed().collect(Collectors.toList());
+        List<Integer> ks = null;
+        boolean flag = true;
+        while(flag) {
+            try {
+                String ks_str = scanner.nextLine();
+                if (ks_str.trim().length() == 1) {
+                    Integer k = Integer.parseInt(ks_str.trim());
+                    if(k<0) {
+                        System.out.println("Invalid input!");
+                        System.out.println(">> ... << ");
+                        continue;
+                    }
+                    ks = Collections.nCopies(r, k);
+                } else {
+                    int numOfNegatives = ks_str.replaceAll("[^-]+", "").length();
+                    ks = Arrays.stream(ks_str.trim().split("\\s+"))
+                            .mapToInt(Integer::parseInt).boxed().collect(Collectors.toList());
+                    if(numOfNegatives>0) {
+                        System.out.println("Invalid input!");
+                        System.out.println(">> ... << ");
+                        continue;
+                    }
+                }
+                flag = false;
+                if (ks.size() != r) {
+                    System.out.println("Length of vector k does not match r!");
+                    System.out.println(">> ... << ");
+                    flag = true;
+                }
+            } catch (Exception e) {
+                System.out.println("Invalid input!");
+                System.out.println(">> ... << ");
+            }
         }
-
-        if (ks.size() != r) {
-            throw new IllegalStateException("Length of vector k does not match r!");
-        }
-        //System.out.println(Arrays.toString(ks));
 
         engine.setR(r);
         engine.setKs(ks);

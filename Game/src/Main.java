@@ -17,6 +17,12 @@ public class Main {
             System.out.println(">> ... << ");
             String choice = scanner.next();
 
+            while(!choice.equals("1") && !choice.equals("2") && !choice.equals("3")) {
+                System.out.println("Invalid input!");
+                System.out.println(">> ... << ");
+                choice = scanner.next();
+            }
+
             switch (choice) {
                 case "1":
                     Detector.demo();
