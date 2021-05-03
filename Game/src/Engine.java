@@ -22,7 +22,8 @@ public class Engine {
         while (turn <= engine.getN()) {
             System.out.println("\n---- TURN " + turn + " ----");
             Engine.makeTurn(engine);
-            List<Integer> pot_map = Detector.checkStatus(engine);
+            List<Integer> pot_map;
+            pot_map = Detector.checkStatus(engine);
             if (engine.isEnded()) {
                 System.out.println();
                 Engine.showState(engine);
@@ -48,7 +49,7 @@ public class Engine {
 
     private void initDeath_fields() {
         death_fields = new HashMap<>();
-        for(int i=0; i< r; i++) death_fields.put(i, new ArrayList<>());
+        for (int i = 0; i < r; i++) death_fields.put(i, new ArrayList<>());
     }
 
     private void updateDeathFields() {
@@ -56,7 +57,7 @@ public class Engine {
     }
 
     public static void makeFirstTurn(Engine engine) {
-        Scanner scanner = new Scanner(System.in);
+        //Scanner scanner = new Scanner(System.in);
         List<Integer> tokens = engine.getTokens();
 
         System.out.println("\n---- TURN " + 1 + " ----");
