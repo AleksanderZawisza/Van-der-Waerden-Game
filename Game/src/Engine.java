@@ -157,8 +157,19 @@ public class Engine {
         System.out.println(">> ... << ");
         String ks_str = scanner.nextLine();
 
-        List<Integer> ks = Arrays.stream(ks_str.trim().split("\\s+"))
-                .mapToInt(Integer::parseInt).boxed().collect(Collectors.toList());
+        List<Integer> ks;
+
+        if (ks_str.contains("x")) {
+            List<Integer> list = new ArrayList<>();
+            for (String s : ks_str.trim().split("\\s+x+\\s")) {
+                Integer integer = Integer.parseInt(s);
+                list.add(integer);
+            }
+            ks = Collections.nCopies(list.get(0), list.get(1));
+        } else {
+            ks = Arrays.stream(ks_str.trim().split("\\s+"))
+                    .mapToInt(Integer::parseInt).boxed().collect(Collectors.toList());
+        }
 
         if (ks.size() != r) {
             throw new IllegalStateException("Length of vector k does not match r!");
