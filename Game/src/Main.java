@@ -10,7 +10,6 @@ public class Main{
                 "3. Close app";
 
         System.out.println("\nWelcome!");
-
         while (true){
             System.out.println("\nWhat do you want to do?");
             System.out.println(options);
