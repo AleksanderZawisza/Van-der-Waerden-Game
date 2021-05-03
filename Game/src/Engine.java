@@ -153,7 +153,8 @@ public class Engine {
         int r = Integer.parseInt(r_str);
         //System.out.println(r);
 
-        System.out.println("\nDefine vector of k_i: \n(if all the same then only one number; else separated by spaces)");
+        System.out.println("\nDefine vector of k_i:" +
+                " \n(separated by spaces for each k_i or single number if all identical)");
         System.out.println(">> ... << ");
         String ks_str = scanner.nextLine();
 
