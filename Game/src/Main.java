@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Main{
+public class Main {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -11,17 +11,21 @@ public class Main{
 
         System.out.println("\nWelcome!");
 
-        while (true){
+        while (true) {
             System.out.println("\nWhat do you want to do?");
             System.out.println(options);
             System.out.println(">> ... << ");
             String choice = scanner.next();
 
-
             switch (choice) {
-                case "1": Detector.demo(); break;
-                case "2": Engine.play(); break;
-                case "3": System.exit(0);
+                case "1":
+                    Detector.demo();
+                    break;
+                case "2":
+                    Engine.play();
+                    break;
+                case "3":
+                    System.exit(0);
                 default:
                     throw new IllegalStateException("Unexpected value: " + choice);
             }

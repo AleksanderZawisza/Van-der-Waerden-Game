@@ -201,7 +201,4 @@ public class Engine {
         return death_fields;
     }
 
-    public void setDeath_fields(Map<Integer, List<Integer>> death_fields) {
-        this.death_fields = death_fields;
-    }
 }
