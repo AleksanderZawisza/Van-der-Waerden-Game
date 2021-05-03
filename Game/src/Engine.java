@@ -9,6 +9,7 @@ public class Engine {
     private List<Integer> ks;
     private boolean ended;
     private int map_color;
+    private Map<Integer, List<Integer>> death_fields;
 
     public static void play() {
         // makes new game
@@ -32,6 +33,7 @@ public class Engine {
                 System.out.println("--------------------------");
                 break;
             }
+            engine.updateDeathFields();
             turn = turn + 1;
         }
         if (!engine.isEnded()) {
@@ -44,6 +46,15 @@ public class Engine {
         }
     }
 
+    private void initDeath_fields() {
+        death_fields = new HashMap<>();
+        for(int i=0; i< r; i++) death_fields.put(i, new ArrayList<>());
+    }
+
+    private void updateDeathFields() {
+        death_fields = new HashMap<>(Strategist.calculateDeathFields(this, tokens));
+    }
+
     public static void makeFirstTurn(Engine engine) {
         Scanner scanner = new Scanner(System.in);
         List<Integer> tokens = engine.getTokens();
@@ -52,14 +63,11 @@ public class Engine {
 
         System.out.println("Player 1:");
         System.out.println("Only one position to choose.");
-
-        // color chosen randomly for now TODO
-        Random random = new Random();
-        int col_choice = random.nextInt(engine.getR());
+        int col_choice = engine.getKs().indexOf(Collections.max(engine.getKs()));
 
         System.out.println("\nPlayer 2:");
         System.out.println("Chooses color " + col_choice + ".");
-
+        engine.initDeath_fields();
         tokens.add(0, col_choice);
     }
 
@@ -67,7 +75,6 @@ public class Engine {
     public static void makeTurn(Engine engine) {
         Scanner scanner = new Scanner(System.in);
         List<Integer> tokens = engine.getTokens();
-
         Engine.showState(engine);
 
         System.out.println("\nPlayer 1:");
@@ -76,11 +83,7 @@ public class Engine {
 
         String pos_str = scanner.nextLine();
         int pos = Integer.parseInt(pos_str);
-
-        // color chosen randomly for now TODO
-        Random random = new Random();
-        int col_choice = random.nextInt(engine.getR());
-
+        int col_choice = Strategist.chooseColor(engine, pos);
         System.out.println("\nPlayer 2:");
         System.out.println("Chooses color " + col_choice + ".");
 
@@ -191,5 +194,13 @@ public class Engine {
 
     public int getMap_color() {
         return map_color;
+    }
+
+    public Map<Integer, List<Integer>> getDeath_fields() {
+        return death_fields;
+    }
+
+    public void setDeath_fields(Map<Integer, List<Integer>> death_fields) {
+        this.death_fields = death_fields;
     }
 }
