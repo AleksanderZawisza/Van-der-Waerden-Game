@@ -83,11 +83,12 @@ public class Engine {
         System.out.println(">> ... << ");
 
         int pos = -1;
-        while(pos<0 || pos>tokens.size()){
+        while (pos < 0 || pos > tokens.size()) {
             try {
                 pos = Integer.parseInt(scanner.nextLine());
-                if (pos>0 && pos<tokens.size()) break;
-            } catch (Exception e) {}
+                if (pos > 0 && pos < tokens.size()) break;
+            } catch (Exception ignored) {
+            }
             System.out.println("Invalid position! (Range: 0 - " + tokens.size() + ")");
             System.out.println(">> ... << ");
         }
@@ -144,11 +145,12 @@ public class Engine {
         System.out.println(">> ... << ");
 
         int n = -1;
-        while(n<0) {
+        while (n < 0) {
             try {
                 n = Integer.parseInt(scanner.nextLine());
-                if (n>0) break;
-            } catch (Exception e) {}
+                if (n > 0) break;
+            } catch (Exception ignored) {
+            }
             System.out.println("Invalid input!");
             System.out.println(">> ... << ");
         }
@@ -168,11 +170,12 @@ public class Engine {
         System.out.println("\nDefine r:");
         System.out.println(">> ... << ");
         int r = -1;
-        while(r<0) {
+        while (r < 0) {
             try {
                 r = Integer.parseInt(scanner.nextLine());
-                if (r>0) break;
-            } catch (Exception e) {}
+                if (r > 0) break;
+            } catch (Exception ignored) {
+            }
             System.out.println("Invalid input!");
             System.out.println(">> ... << ");
         }
@@ -182,12 +185,12 @@ public class Engine {
         System.out.println(">> ... << ");
         List<Integer> ks = null;
         boolean flag = true;
-        while(flag) {
+        while (flag) {
             try {
                 String ks_str = scanner.nextLine();
                 if (ks_str.trim().length() == 1) {
-                    Integer k = Integer.parseInt(ks_str.trim());
-                    if(k<0) {
+                    int k = Integer.parseInt(ks_str.trim());
+                    if (k < 0) {
                         System.out.println("Invalid input!");
                         System.out.println(">> ... << ");
                         continue;
@@ -197,7 +200,7 @@ public class Engine {
                     int numOfNegatives = ks_str.replaceAll("[^-]+", "").length();
                     ks = Arrays.stream(ks_str.trim().split("\\s+"))
                             .mapToInt(Integer::parseInt).boxed().collect(Collectors.toList());
-                    if(numOfNegatives>0) {
+                    if (numOfNegatives > 0) {
                         System.out.println("Invalid input!");
                         System.out.println(">> ... << ");
                         continue;
