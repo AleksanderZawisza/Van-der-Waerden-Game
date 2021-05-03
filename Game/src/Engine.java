@@ -153,19 +153,15 @@ public class Engine {
         int r = Integer.parseInt(r_str);
         //System.out.println(r);
 
-        System.out.println("\nDefine vector of k_i: \n(separated by spaces)");
+        System.out.println("\nDefine vector of k_i: \n(if all the same then only one number; else separated by spaces)");
         System.out.println(">> ... << ");
         String ks_str = scanner.nextLine();
 
         List<Integer> ks;
 
-        if (ks_str.contains("x")) {
-            List<Integer> list = new ArrayList<>();
-            for (String s : ks_str.trim().split("\\s+x+\\s")) {
-                Integer integer = Integer.parseInt(s);
-                list.add(integer);
-            }
-            ks = Collections.nCopies(list.get(0), list.get(1));
+        if (ks_str.trim().length() == 1) {
+            Integer k = Integer.parseInt(ks_str.trim());
+            ks = Collections.nCopies(r, k);
         } else {
             ks = Arrays.stream(ks_str.trim().split("\\s+"))
                     .mapToInt(Integer::parseInt).boxed().collect(Collectors.toList());
