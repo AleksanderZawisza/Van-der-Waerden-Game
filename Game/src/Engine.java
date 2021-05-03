@@ -99,13 +99,14 @@ public class Engine {
         int r_len = Integer.toString(engine.getR()).length();
         int field_size = Math.max(n_len, r_len);
 
-        String format_d = "%" + field_size + "d";
+        String format_d = "%" + field_size + "d"; //printowanie tokenow
+        System.out.print(" ");
         for (int i = 0; i < tokens.toArray().length; i++) {
             System.out.print(String.format(format_d, tokens.toArray()[i]));
         }
         System.out.println();
 
-        String formats = "%" + field_size + "s";
+        String formats = "%" + field_size + "s"; //printowanie kresek
         String formats_minus1 = "%" + (field_size - 1) + "s";
         System.out.print(String.format(formats_minus1, "|"));
         for (int i = 1; i < tokens.size() + 1; i++) {
@@ -118,7 +119,7 @@ public class Engine {
             indexes[i] = i;
         }
 
-        String format_d_minus1 = "%" + (field_size - 1) + "d";
+        String format_d_minus1 = "%" + (field_size - 1) + "d"; //printowanie indeksow
         System.out.print(String.format(format_d_minus1, indexes[0]));
         for (int i = 1; i < indexes.length; i++) {
             System.out.print(String.format(format_d, indexes[i]));
