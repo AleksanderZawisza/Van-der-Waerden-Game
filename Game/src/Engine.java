@@ -40,10 +40,10 @@ public class Engine {
         if (!engine.isEnded()) {
             System.out.println();
             Engine.showState(engine);
-            System.out.println("\n---------------------");
+            System.out.println("\n-----------------------");
             System.out.println("No turns are left.");
             System.out.println("Player 2 is THE WINNER!");
-            System.out.println("---------------------");
+            System.out.println("-----------------------");
         }
     }
 
