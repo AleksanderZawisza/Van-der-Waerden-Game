@@ -30,7 +30,7 @@ public class Engine {
                 System.out.println("\n--------------------------");
                 System.out.println("There is a MAP of color: " + engine.getMap_color());
                 System.out.println("Indexes: " + pot_map);
-                System.out.println("Player 1  is THE WINNER!");
+                System.out.println("Player 1 is THE WINNER!");
                 System.out.println("--------------------------");
                 break;
             }
