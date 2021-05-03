@@ -92,10 +92,8 @@ public class Strategist {
             System.out.println(df.toString());
             dfStats.add(new DFStats(tmpTokens, df, engine.getKs(), ok_color));
         }
-        if (dfStats.size() > 0) {
-            Collections.sort(dfStats);
-            col_choice = dfStats.get(0).i;
-        }
+        if (dfStats.size() > 0) col_choice = Collections.min(dfStats).i;
+
         System.out.println("\nStatistics for death fields by color:");
         System.out.println(dfStats.toString());
 
