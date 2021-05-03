@@ -83,11 +83,12 @@ public class Strategist {
                 col_choice = 0;
 
         List<Strategist.DFStats> dfStats = new ArrayList<>();
+        System.out.println("\nPossible death fields by color:");
         for (Integer ok_color : ok_colors) {
             List<Integer> tmpTokens = new ArrayList<>(tokens);
             tmpTokens.add(pos, ok_color);
             Map<Integer, List<Integer>> df = new HashMap<>(Strategist.calculateDeathFields(engine, tmpTokens));
-            System.out.println(ok_color);
+            System.out.println("---- Color " + ok_color + " ----");
             System.out.println(df.toString());
             dfStats.add(new DFStats(tmpTokens, df, engine.getKs(), ok_color));
         }
@@ -95,6 +96,7 @@ public class Strategist {
             Collections.sort(dfStats);
             col_choice = dfStats.get(0).i;
         }
+        System.out.println("\nStatistics for death fields by color:");
         System.out.println(dfStats.toString());
 
         return col_choice;
