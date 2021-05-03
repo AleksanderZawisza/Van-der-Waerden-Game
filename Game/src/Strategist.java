@@ -16,8 +16,6 @@ public class Strategist {
             for (int j = 1; j < r; j++) {
                 common.retainAll(df.get(j));
                 all_fields.addAll(df.get(j));
-                if (common.size() == 0)
-                    break;
             }
             Set<Integer> fields_set = new HashSet<>(all_fields);
             this.n_absolute_death = common.size();
