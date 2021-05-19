@@ -180,7 +180,7 @@ public class Engine {
             System.out.println(">> ... << ");
         }
 
-        System.out.println("\nDefine vector of k_i (max length of colors):" +
+        System.out.println("\nDefine vector of k_i (max lengths of colors):" +
                 " \n(separated by spaces for each k_i or single number if all identical)");
         System.out.println(">> ... << ");
         List<Integer> ks = null;
