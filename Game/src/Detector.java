@@ -12,15 +12,24 @@ public class Detector {
 
         System.out.println("\nEnter chosen vector of tokens: \n(starting from 0; separated by spaces)");
         System.out.println(">> ... << ");
-        String tokens_str = scanner.nextLine();
-
-        List<Integer> tokens = Arrays.stream(tokens_str.trim().split("\\s+"))
-                .mapToInt(Integer::parseInt).boxed().collect(Collectors.toList());
-
-        if (Collections.min(tokens) < 0 || Collections.max(tokens) > engine.getR() - 1) {
-            throw new IllegalStateException("Elements must be between 0 and r-1!");
+        List<Integer> tokens = null;
+        boolean flag = true;
+        while (flag) {
+            try {
+                String tokens_str = scanner.nextLine();
+                tokens = Arrays.stream(tokens_str.trim().split("\\s+"))
+                        .mapToInt(Integer::parseInt).boxed().collect(Collectors.toList());
+                flag = false;
+                if (Collections.min(tokens) < 0 || Collections.max(tokens) > (engine.getR() - 1)) {
+                    System.out.println("Elements must be between 0 and " + Integer.toString(engine.getR()-1) + "!");
+                    System.out.println(">> ... << ");
+                    flag = true;
+                }
+            } catch (Exception e) {
+                System.out.println("Invalid input!");
+                System.out.println(">> ... << ");
+            }
         }
-        //System.out.println(Arrays.toString(tokens));
 
         List<List<Integer>> positions = Detector.makePositions(tokens, engine.getR());
 
