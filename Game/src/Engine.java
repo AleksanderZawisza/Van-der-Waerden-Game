@@ -188,7 +188,7 @@ public class Engine {
         while (flag) {
             try {
                 String ks_str = scanner.nextLine();
-                if (ks_str.trim().length() == 1) {
+                if (!ks_str.trim().contains(" ")) {
                     int k = Integer.parseInt(ks_str.trim());
                     if (k < 0) {
                         System.out.println("Invalid input!");
