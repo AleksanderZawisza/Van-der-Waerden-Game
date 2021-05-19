@@ -52,7 +52,7 @@ public class Strategist {
 
     }
 
-    public static int chooseColor(Engine engine, int pos) {
+    public static int chooseColor(Engine engine, int pos, Debugger debugger) {
         Random random = new Random();
         int col_choice = random.nextInt(engine.getR());
         List<Integer> forbidden_colors = new ArrayList<>();
@@ -81,19 +81,19 @@ public class Strategist {
                 col_choice = 0;
 
         List<Strategist.DFStats> dfStats = new ArrayList<>();
-        System.out.println("\nPossible death fields by color:");
+        if (debugger.getDebugMode()) System.out.println("\nPossible death fields by color:");
         for (Integer ok_color : ok_colors) {
             List<Integer> tmpTokens = new ArrayList<>(tokens);
             tmpTokens.add(pos, ok_color);
             Map<Integer, List<Integer>> df = new HashMap<>(Strategist.calculateDeathFields(engine, tmpTokens));
-            System.out.println("---- Color " + ok_color + " ----");
-            System.out.println(df.toString());
+            if (debugger.getDebugMode()) System.out.println("---- Color " + ok_color + " ----");
+            if (debugger.getDebugMode()) System.out.println(df.toString());
             dfStats.add(new DFStats(tmpTokens, df, engine.getKs(), ok_color));
         }
         if (dfStats.size() > 0) col_choice = Collections.min(dfStats).i;
 
-        System.out.println("\nStatistics for death fields by color:");
-        System.out.println(dfStats.toString());
+        if (debugger.getDebugMode()) System.out.println("\nStatistics for death fields by color:");
+        if (debugger.getDebugMode()) System.out.println(dfStats.toString());
 
         return col_choice;
     }

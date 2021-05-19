@@ -11,7 +11,7 @@ public class Engine {
     private int map_color;
     private Map<Integer, List<Integer>> death_fields;
 
-    public static void play() {
+    public static void play(Debugger debugger) {
         // makes new game
         Engine engine = new Engine();
         Engine.initialize(engine);
@@ -21,7 +21,7 @@ public class Engine {
 
         while (turn <= engine.getN()) {
             System.out.println("\n---- TURN " + turn + " ----");
-            Engine.makeTurn(engine);
+            Engine.makeTurn(engine, debugger);
             List<Integer> pot_map;
             pot_map = Detector.checkStatus(engine);
             if (engine.isEnded()) {
@@ -73,7 +73,7 @@ public class Engine {
     }
 
 
-    public static void makeTurn(Engine engine) {
+    public static void makeTurn(Engine engine, Debugger debugger) {
         Scanner scanner = new Scanner(System.in);
         List<Integer> tokens = engine.getTokens();
         Engine.showState(engine);
@@ -86,13 +86,13 @@ public class Engine {
         while (pos < 0 || pos > tokens.size()) {
             try {
                 pos = Integer.parseInt(scanner.nextLine());
-                if (pos > 0 && pos < tokens.size()) break;
+                if (pos >= 0 && pos <= tokens.size()) break;
             } catch (Exception ignored) {
             }
             System.out.println("Invalid position! (Range: 0 - " + tokens.size() + ")");
             System.out.println(">> ... << ");
         }
-        int col_choice = Strategist.chooseColor(engine, pos);
+        int col_choice = Strategist.chooseColor(engine, pos, debugger);
         System.out.println("\nPlayer 2:");
         System.out.println("Chooses color " + col_choice + ".");
 
