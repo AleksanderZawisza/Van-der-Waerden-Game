@@ -141,7 +141,7 @@ public class Engine {
         // initializes all properties of game engine
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("\nDefine n:");
+        System.out.println("\nDefine n (max vector length):");
         System.out.println(">> ... << ");
 
         int n = -1;
@@ -167,7 +167,7 @@ public class Engine {
         // for Detector demo
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("\nDefine r:");
+        System.out.println("\nDefine r (number of colors):");
         System.out.println(">> ... << ");
         int r = -1;
         while (r < 0) {
@@ -180,7 +180,7 @@ public class Engine {
             System.out.println(">> ... << ");
         }
 
-        System.out.println("\nDefine vector of k_i:" +
+        System.out.println("\nDefine vector of k_i (max length of colors):" +
                 " \n(separated by spaces for each k_i or single number if all identical)");
         System.out.println(">> ... << ");
         List<Integer> ks = null;
@@ -208,7 +208,7 @@ public class Engine {
                 }
                 flag = false;
                 if (ks.size() != r) {
-                    System.out.println("Length of vector k does not match r!");
+                    System.out.println("Length of vector k (color lengths) does not match r (number of colors)!");
                     System.out.println(">> ... << ");
                     flag = true;
                 }
