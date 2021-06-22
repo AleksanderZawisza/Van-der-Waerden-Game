@@ -145,9 +145,9 @@ public class Engine {
         System.out.println(">> ... << ");
 
         int n = -1;
-        while (n < 0) {
+        while (n <= 0) {
             try {
-                n = Integer.parseInt(scanner.nextLine());
+                n = Integer.parseInt(scanner.nextLine().trim());
                 if (n > 0) break;
             } catch (Exception ignored) {
             }
@@ -170,9 +170,9 @@ public class Engine {
         System.out.println("\nDefine r (number of colors):");
         System.out.println(">> ... << ");
         int r = -1;
-        while (r < 0) {
+        while (r <= 0) {
             try {
-                r = Integer.parseInt(scanner.nextLine());
+                r = Integer.parseInt(scanner.nextLine().trim());
                 if (r > 0) break;
             } catch (Exception ignored) {
             }
@@ -180,7 +180,7 @@ public class Engine {
             System.out.println(">> ... << ");
         }
 
-        System.out.println("\nDefine vector of k_i (max lengths of colors):" +
+        System.out.println("\nDefine vector of k_i (max lengths of colors, greater than 1):" +
                 " \n(separated by spaces for each k_i or single number if all identical)");
         System.out.println(">> ... << ");
         List<Integer> ks = null;
@@ -190,7 +190,7 @@ public class Engine {
                 String ks_str = scanner.nextLine();
                 if (!ks_str.trim().contains(" ")) {
                     int k = Integer.parseInt(ks_str.trim());
-                    if (k < 0) {
+                    if (k <= 1) {
                         System.out.println("Invalid input!");
                         System.out.println(">> ... << ");
                         continue;
@@ -201,6 +201,16 @@ public class Engine {
                     ks = Arrays.stream(ks_str.trim().split("\\s+"))
                             .mapToInt(Integer::parseInt).boxed().collect(Collectors.toList());
                     if (numOfNegatives > 0) {
+                        System.out.println("Invalid input!");
+                        System.out.println(">> ... << ");
+                        continue;
+                    }
+                    if (ks.contains(0)) {
+                        System.out.println("Invalid input!");
+                        System.out.println(">> ... << ");
+                        continue;
+                    }
+                    if (ks.contains(1)) {
                         System.out.println("Invalid input!");
                         System.out.println(">> ... << ");
                         continue;
