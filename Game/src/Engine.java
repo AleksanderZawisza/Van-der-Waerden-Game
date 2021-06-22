@@ -144,8 +144,8 @@ public class Engine {
         System.out.println("\nDefine n (max vector length):");
         System.out.println(">> ... << ");
 
-        int n = -1;
-        while (n <= 0) {
+        int n;
+        while (true) {
             try {
                 n = Integer.parseInt(scanner.nextLine().trim());
                 if (n > 0) break;
@@ -169,8 +169,8 @@ public class Engine {
 
         System.out.println("\nDefine r (number of colors):");
         System.out.println(">> ... << ");
-        int r = -1;
-        while (r <= 0) {
+        int r;
+        while (true) {
             try {
                 r = Integer.parseInt(scanner.nextLine().trim());
                 if (r > 0) break;
