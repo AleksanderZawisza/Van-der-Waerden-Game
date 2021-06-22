@@ -21,7 +21,7 @@ public class Detector {
                         .mapToInt(Integer::parseInt).boxed().collect(Collectors.toList());
                 flag = false;
                 if (Collections.min(tokens) < 0 || Collections.max(tokens) > (engine.getR() - 1)) {
-                    System.out.println("Elements must be between 0 and " + Integer.toString(engine.getR()-1) + "!");
+                    System.out.println("Elements must be between 0 and " + (engine.getR() - 1) + "!");
                     System.out.println(">> ... << ");
                     flag = true;
                 }
@@ -104,7 +104,7 @@ public class Detector {
             int max_d = (int) Math.floor(m_d) + 1;
             //System.out.println("col: " + i + " max_d: " + max_d);
 
-            for (int k = min_pos; k < max_pos - 1; k++) {
+            for (int k = min_pos; k < max_pos+1; k++) {
                 if (!pos_i.contains(k)) {
                     continue;
                 }
@@ -127,6 +127,7 @@ public class Detector {
                             map_list_i.add(copy);
                         }
                     }
+
                 }
             }
             map_list.add(map_list_i);
