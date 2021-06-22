@@ -122,12 +122,11 @@ public class Detector {
                         } else {
                             break;
                         }
-                        if (temp_map.size() >= ks.get(i)) {
-                            List<Integer> copy = List.copyOf(temp_map);
-                            map_list_i.add(copy);
-                        }
                     }
-
+                    if (temp_map.size() >= ks.get(i)) {
+                        List<Integer> copy = List.copyOf(temp_map);
+                        map_list_i.add(copy);
+                    }
                 }
             }
             map_list.add(map_list_i);
